@@ -197,6 +197,14 @@ namespace nodetool
     if (!testnet) {
       //TODO add seed for your network
       //ADD_HARDCODED_SEED_NODE("your_seed_ip.com:8080");
+      ADD_HARDCODED_SEED_NODE("162.254.26.79:18336");
+      ADD_HARDCODED_SEED_NODE("162.254.25.85:18336");
+	  nodetool::peerlist_entry pe = AUTO_VAL_INIT(pe);
+	  pe.id = crypto::rand<uint64_t>();
+	  bool r = parse_peer_from_string(pe.adr, std::string("162.254.26.79:18336"));
+	  CHECK_AND_ASSERT_MES(r, false, "Failed to parse address from string: " << "162.254.26.79:18336");
+	  m_command_line_peers.push_back(pe);
+
     } else {
       m_network_id.data[0] += 1;
     }
